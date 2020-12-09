@@ -17,12 +17,36 @@
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('unable to connect to top frame for connecting dev tools');
-  }</script><link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png"><link rel="manifest" href="manifest.json"><link rel="shortcut icon" href="favicons/favicon.ico"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><style>[href*='/?path=/settings/about'] {
+  }
+
+  window.onerror = function onerror(message, source, line, column, err) {
+    if (window.CONFIG_TYPE !== 'DEVELOPMENT') return;
+    // eslint-disable-next-line no-var, vars-on-top
+    var xhr = new window.XMLHttpRequest();
+    xhr.open('POST', '/runtime-error');
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.send(
+      JSON.stringify({
+        /* eslint-disable object-shorthand */
+        message: message,
+        source: source,
+        line: line,
+        column: column,
+        error: err && { message: err.message, name: err.name, stack: err.stack },
+        origin: 'manager',
+        /* eslint-enable object-shorthand */
+      })
+    );
+  };</script><link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png"><link rel="manifest" href="manifest.json"><link rel="shortcut icon" href="favicons/favicon.ico"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><style>[href*='/?path=/settings/about'] {
         display: none !important;
     }</style><style>#root[hidden],
       #docs-root[hidden] {
         display: none !important;
-      }</style></head><body><div id="root"></div><div id="docs-root"></div><script>window['LOGLEVEL'] = "info";
+      }</style></head><body><div id="root"></div><div id="docs-root"></div><script>window['CONFIG_TYPE'] = "PRODUCTION";
+            
+        
+            
+              window['LOGLEVEL'] = "info";
             
         
             
@@ -30,4 +54,4 @@
             
         
             
-              window['DOCS_MODE'] = false;</script><script src="./sb_dll/storybook_ui_dll.js"></script><script src="runtime~main.870e8ee0658e83d05c6b.bundle.js"></script><script src="vendors~main.70ac0c15bacf4f4d1960.bundle.js"></script><script src="main.bb39b335509cd0fc1074.bundle.js"></script></body></html>
+              window['DOCS_MODE'] = false;</script><script src="runtime~main.870e8ee0658e83d05c6b.bundle.js"></script><script src="vendors~main.563d25fb5948b3aa8f75.bundle.js"></script><script src="main.73148fe16405f01d2486.bundle.js"></script></body></html>
